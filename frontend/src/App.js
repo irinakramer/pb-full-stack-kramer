@@ -1,7 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './componetns/Header';
+
 function App() {
   return (
     <div className="App">
-     <h1>Whale sightings data</h1>
+     <Header />
     </div>
   );
 }
