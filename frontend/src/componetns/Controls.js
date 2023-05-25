@@ -1,7 +1,13 @@
 import React from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
+import ApplicationHelper from '../helpers/ApplicationHelper';
 
-const Controls = () => {
+const Controls = ({ data }) => {
+  const { getYears, getSpecies } = ApplicationHelper;
+
+  const years = getYears(data);
+  const species = getSpecies(data);
+
   return (
     <Container className="my-3">
       <Form>
@@ -11,9 +17,11 @@ const Controls = () => {
               <Form.Label>Year</Form.Label>
               <Form.Select defaultValue="Select...">
                 <option>Select...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
               </Form.Select>
             </Form.Group>
           </Col>
@@ -22,9 +30,11 @@ const Controls = () => {
               <Form.Label>Species</Form.Label>
               <Form.Select defaultValue="Select...">
                 <option>Select...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                {species.map((group) => (
+                  <option key={group} value={group}>
+                    {group}
+                  </option>
+                ))}
               </Form.Select>
             </Form.Group>
           </Col>
