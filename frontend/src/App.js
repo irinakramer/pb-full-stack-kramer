@@ -4,7 +4,7 @@ import Header from './componetns/Header';
 function App() {
   return (
     <div className="App">
-     <Header />
+      <Header />
     </div>
   );
 }
