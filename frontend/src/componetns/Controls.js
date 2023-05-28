@@ -3,7 +3,7 @@ import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import ApplicationHelper from '../helpers/ApplicationHelper';
 
 const Controls = ({
-  data,
+  sightings,
   year,
   setYear,
   commonName,
@@ -13,8 +13,8 @@ const Controls = ({
 }) => {
   const { getYears, getSpecies } = ApplicationHelper;
 
-  const years = getYears(data);
-  const species = getSpecies(data);
+  const years = getYears(sightings);
+  const species = getSpecies(sightings);
 
   return (
     <Container className="my-3">
