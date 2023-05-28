@@ -27,8 +27,6 @@ function App() {
     fetchSightings();
   }, []);
 
-  //console.log(sightings);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = calculateGraphData(sightings, commonName, year);

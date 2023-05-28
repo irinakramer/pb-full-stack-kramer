@@ -46,7 +46,7 @@ const ApplicationHelper = {
 
   // combine data with same commonname and year
   // sum up observation counts for same month
-  calculateGraphData: (data, commonname, year) => {
+  combineData: (data, commonname, year) => {
     const { isSameMonth } = ApplicationHelper;
 
     return data.reduce((acc, curr) => {
@@ -62,6 +62,42 @@ const ApplicationHelper = {
 
       return acc;
     }, []);
+  },
+
+  months: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ],
+
+  // iterate over 12 months and fill in month name for those months with no sightings
+  // to be used to show all 12 months inside the graph
+  fillEmptyMonths: (data) => {
+    const { months } = ApplicationHelper;
+
+    return months.map((month) => {
+      const found = data.find((el) => el.month === month);
+
+      if (!found) return { month };
+      else return found;
+    });
+  },
+
+  // final graph data with all months to be shown in the graph
+  calculateGraphData: (data, commonname, year) => {
+    const { combineData, fillEmptyMonths } = ApplicationHelper;
+    const combinedData = combineData(data, commonname, year);
+
+    return fillEmptyMonths(combinedData);
   },
 };
 
