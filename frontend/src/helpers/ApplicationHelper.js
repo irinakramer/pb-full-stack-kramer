@@ -7,18 +7,14 @@ const ApplicationHelper = {
     return new Date(data).getMonth();
   },
 
-  getMonthName: (data) => {
-    return new Date(data).toLocaleString('en-us', { month: 'long' });
-  },
-
   parseData: (data) => {
-    const { getYear, getMonthName } = ApplicationHelper;
+    const { getYear, getMonth } = ApplicationHelper;
 
     return data.map(({ commonname, evt_datetime_utc, observationcount }) => ({
       commonname,
       observationcount,
       year: getYear(evt_datetime_utc),
-      month: getMonthName(evt_datetime_utc),
+      month: getMonth(evt_datetime_utc),
     }));
   },
 
@@ -40,64 +36,36 @@ const ApplicationHelper = {
     }, []);
   },
 
-  isSameMonth: (arr, obj) => {
-    return arr.find(({ month }) => month === obj.month);
-  },
-
-  // combine data with same commonname and year
-  // sum up observation counts for same month
-  combineData: (data, commonname, year) => {
-    const { isSameMonth } = ApplicationHelper;
-
-    return data.reduce((acc, curr) => {
-      if (curr.year === year && curr.commonname === commonname) {
-        const found = isSameMonth(acc, curr);
-
-        if (found) {
-          found.observationcount += curr.observationcount;
-        } else {
-          return [...acc, curr];
-        }
-      }
-
-      return acc;
-    }, []);
-  },
-
   months: [
-    'January',
-    'February',
-    'March',
-    'April',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
     'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ],
 
-  // iterate over 12 months and fill in month name for those months with no sightings
-  // to be used to show all 12 months inside the graph
-  fillEmptyMonths: (data) => {
-    const { months } = ApplicationHelper;
-
-    return months.map((month) => {
-      const found = data.find((el) => el.month === month);
-
-      if (!found) return { month };
-      else return found;
-    });
+  initGraphData: (months) => {
+    return months.map((month) => ({ month, observationcount: 0 }));
   },
 
-  // final graph data with all months to be shown in the graph
-  calculateGraphData: (data, commonname, year) => {
-    const { combineData, fillEmptyMonths } = ApplicationHelper;
-    const combinedData = combineData(data, commonname, year);
+  calculateGraphData: (sightings, commonname, year) => {
+    const { months, initGraphData } = ApplicationHelper;
+    const graphData = initGraphData(months);
 
-    return fillEmptyMonths(combinedData);
+    sightings.forEach((sighting) => {
+      if (sighting.year === year && sighting.commonname === commonname) {
+        graphData[sighting.month].observationcount += sighting.observationcount;
+      }
+    });
+
+    return graphData;
   },
 };
 

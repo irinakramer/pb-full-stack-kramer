@@ -43,8 +43,6 @@ function App() {
   };
 
   return (
-    // TODO - add loading spinner
-    // TODO - add UI for empty graphdata
     <div className="App">
       <Header />
       <Controls
