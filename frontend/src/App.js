@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './componetns/Header';
 import Controls from './componetns/Controls';
 import Graph from './componetns/Graph';
+import Spinner from './componetns/Spinner';
 import dummyData from './data/dummy';
 import ApplicationHelper from './helpers/ApplicationHelper';
 
@@ -12,6 +13,7 @@ function App() {
   const { parseData, calculateGraphData } = ApplicationHelper;
 
   const [sightings, setSightings] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [year, setYear] = useState(0);
   const [commonName, setCommonName] = useState('');
   const [graphData, setGraphData] = useState([]);
@@ -19,7 +21,10 @@ function App() {
   const fetchSightings = async () => {
     fetch(`${API_URL}/sighting`)
       .then((res) => res.json())
-      .then((data) => setSightings(parseData(data)))
+      .then((data) => {
+        setSightings(parseData(data));
+        setLoading(false);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -45,16 +50,22 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Controls
-        sightings={sightings}
-        year={year}
-        setYear={setYear}
-        commonName={commonName}
-        setCommonName={setCommonName}
-        handleSubmit={handleSubmit}
-        handleReset={handleReset}
-      />
-      <Graph data={graphData} />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Controls
+            sightings={sightings}
+            year={year}
+            setYear={setYear}
+            commonName={commonName}
+            setCommonName={setCommonName}
+            handleSubmit={handleSubmit}
+            handleReset={handleReset}
+          />
+          <Graph data={graphData} />
+        </>
+      )}
     </div>
   );
 }
