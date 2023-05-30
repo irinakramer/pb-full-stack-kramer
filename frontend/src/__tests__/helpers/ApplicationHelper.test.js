@@ -42,6 +42,12 @@ const sightings = [
 ];
 
 describe('parseData', () => {
+  it('returns empty array', () => {
+    const data = undefined;
+
+    expect(getSpecies(data).length).toBe(0);
+  });
+
   it('returns array with 3 elements', () => {
     expect(Array.isArray(parseData(data))).toBe(true);
     expect(parseData(data).length).toBe(3);
