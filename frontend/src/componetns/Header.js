@@ -1,22 +1,18 @@
 import React from 'react';
 import { Navbar, Container } from 'react-bootstrap';
-import logo from '../images/logo.png';
+import logo from '../images/pb_logo.svg';
 
 const Header = () => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="light" variant="light">
       <Container>
         <Navbar.Brand>
           <img
             src={logo}
-            width="30"
-            height="30"
+            width="150"
             className="d-inline-block align-top me-3"
-            alt="React Bootstrap logo"
+            alt="Point Blue logo"
           />
-          <Navbar.Text className="fs-5 fw-semibold">
-            Whale Sightings Data
-          </Navbar.Text>
         </Navbar.Brand>
       </Container>
     </Navbar>

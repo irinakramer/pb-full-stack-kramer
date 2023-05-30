@@ -4,6 +4,7 @@ import Header from './componetns/Header';
 import Controls from './componetns/Controls';
 import Graph from './componetns/Graph';
 import Spinner from './componetns/Spinner';
+import Welcome from './componetns/Welcome';
 import dummyData from './data/dummy';
 import ApplicationHelper from './helpers/ApplicationHelper';
 
@@ -54,6 +55,7 @@ function App() {
         <Spinner />
       ) : (
         <>
+          <Welcome />
           <Controls
             sightings={sightings}
             year={year}

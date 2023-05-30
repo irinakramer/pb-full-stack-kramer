@@ -43,7 +43,7 @@ const Graph = ({ data }) => {
             <Bar
               name="Whale Sightings"
               dataKey="observationcount"
-              fill="#8884d8"
+              fill="#4392ce"
             />
           </BarChart>
         </ResponsiveContainer>
