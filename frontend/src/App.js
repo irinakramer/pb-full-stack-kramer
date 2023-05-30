@@ -6,6 +6,7 @@ import Graph from './componetns/Graph';
 import Spinner from './componetns/Spinner';
 import Welcome from './componetns/Welcome';
 import Notification from './componetns/Notification';
+import Error from './componetns/Error';
 import ApplicationHelper from './helpers/ApplicationHelper';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
@@ -15,6 +16,7 @@ function App() {
 
   const [sightings, setSightings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [year, setYear] = useState(0);
   const [commonName, setCommonName] = useState('');
   const [graphData, setGraphData] = useState([]);
@@ -27,7 +29,10 @@ function App() {
         setSightings(parseData(data));
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setError(err.message);
+      });
   };
 
   useEffect(() => {
@@ -50,32 +55,30 @@ function App() {
     setGraphData([]);
   };
 
+  if (error) return <Error />;
+
+  if (loading) return <Spinner />;
+
   return (
     <div className="App">
       <Header />
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <Welcome />
-          <Controls
-            sightings={sightings}
-            year={year}
-            setYear={setYear}
-            commonName={commonName}
-            setCommonName={setCommonName}
-            handleSubmit={handleSubmit}
-            handleReset={handleReset}
-          />
-          <Graph data={graphData} />
-          <Notification
-            showToast={showToast}
-            setShowToast={setShowToast}
-            year={year}
-            commonName={commonName}
-          />
-        </>
-      )}
+      <Welcome />
+      <Controls
+        sightings={sightings}
+        year={year}
+        setYear={setYear}
+        commonName={commonName}
+        setCommonName={setCommonName}
+        handleSubmit={handleSubmit}
+        handleReset={handleReset}
+      />
+      <Graph data={graphData} />
+      <Notification
+        showToast={showToast}
+        setShowToast={setShowToast}
+        year={year}
+        commonName={commonName}
+      />
     </div>
   );
 }
