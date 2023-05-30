@@ -19,7 +19,7 @@ const graphStyles = {
 const Graph = ({ data }) => {
   return (
     <Container>
-      <Container style={graphStyles} className="p-2 p-lg-4">
+      <Container style={graphStyles} className="p-1 p-md-3 p-lg-4">
         <ResponsiveContainer width="100%" height="100%" minHeight={300}>
           <BarChart
             width={500}

@@ -6,7 +6,7 @@ const Welcome = () => {
     <Container className="mt-3">
       <p>Welcome to the Point Blue Conservation Science.</p>
       <p>
-        Here you can access whale sighting data collected from the Farallon
+        Here you can access whale sightings data collected from the Farallon
         Islands lighthouse. <br />
         Please make your selections below to visualize the data in the graph
         format.

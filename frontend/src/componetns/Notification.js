@@ -15,7 +15,7 @@ const Notification = ({ showToast, setShowToast, year, commonName }) => {
           <strong className="me-auto">Note</strong>
         </Toast.Header>
         <Toast.Body>
-          There were no sightings of {commonName} in {year}. Plase make another
+          There were no sightings of {commonName} in {year}. Please make another
           selection.
         </Toast.Body>
       </Toast>

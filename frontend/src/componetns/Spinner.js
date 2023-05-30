@@ -1,9 +1,16 @@
 import React from 'react';
 import { Container, Spinner as Loader } from 'react-bootstrap';
 
+const spinnerStyle = {
+  display: 'flex',
+  height: '80vh',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
 const Spinner = () => {
   return (
-    <Container className="vw-100 vh-100 d-flex align-items-center justify-content-center">
+    <Container style={spinnerStyle}>
       <Loader animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
       </Loader>
