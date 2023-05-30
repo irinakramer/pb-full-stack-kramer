@@ -19,6 +19,8 @@ const ApplicationHelper = {
   },
 
   getSpecies: (data) => {
+    if (!data) return [];
+
     return data.reduce((acc, curr) => {
       if (!acc.includes(curr.commonname)) {
         return [...acc, curr.commonname];
@@ -28,6 +30,8 @@ const ApplicationHelper = {
   },
 
   getYears: (data) => {
+    if (!data) return [];
+
     return data.reduce((acc, curr) => {
       if (!acc.includes(curr.year)) {
         return [...acc, curr.year];
