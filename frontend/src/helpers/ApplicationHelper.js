@@ -67,6 +67,10 @@ const ApplicationHelper = {
 
     return graphData;
   },
+
+  isZeroCount: (data) => {
+    if (data.length) return !data.find((el) => el.observationcount !== 0);
+  },
 };
 
 export default ApplicationHelper;
