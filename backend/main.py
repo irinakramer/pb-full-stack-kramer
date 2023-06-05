@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import dotenv_values
 from pymongo import MongoClient
 from routes import router as sighting_router
-import uvicorn
 
 config = dotenv_values(".env.local")
 
@@ -28,6 +27,3 @@ def shutdown_db_client():
     app.mongodb_client.close()
 
 app.include_router(sighting_router, tags=["sightings"], prefix="/sighting")
-
-if __name__ == "__main__":
-  uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
