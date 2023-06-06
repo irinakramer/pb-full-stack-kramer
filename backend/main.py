@@ -20,7 +20,9 @@ app.add_middleware(
 def startup_db_client():
     app.mongodb_client = MongoClient(config["MONGODB_URI"])
     app.database = app.mongodb_client[config["MONGODB_NAME"]]
-    print("Connected to the MongoDB database!")
+    print("##app.mongodb_client: ", app.mongodb_client)
+    print("##app.database: ", app.database)
+    print("##Connected to the MongoDB database!")
 
 @app.on_event("shutdown")
 def shutdown_db_client():
